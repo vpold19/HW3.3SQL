@@ -1,12 +1,12 @@
 package com.skypro.SQl_HW33.service;
 
 import com.skypro.SQl_HW33.exception.DataNotFoundedException;
+import com.skypro.SQl_HW33.exception.FacultyNotFoundException;
 import com.skypro.SQl_HW33.model.Faculty;
 import com.skypro.SQl_HW33.repository.FacultyRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
-import java.util.stream.Collectors;
 
 @Service
 public class FacultyService {
@@ -46,12 +46,20 @@ public class FacultyService {
     public Faculty delete(Long id) {
         Faculty faculty = facultyRepository.findById(id)
                 .orElseThrow(DataNotFoundedException::new);
-         facultyRepository.delete(faculty);
-         return faculty;
-        }
+        facultyRepository.delete(faculty);
+        return faculty;
+    }
 
     public Collection<Faculty> getByColor(String color) {
         return facultyRepository.findAllByColor(color);
+    }
+
+    public Collection<Faculty> getByColorOrName(String color, String name) {
+        return facultyRepository.findAllByColorIgnoreCaseName(color, name);
+    }
+
+    public Faculty getByStudentId(Long studentId) {
+        return facultyRepository.findByStudentId(studentId).orElseThrow(FacultyNotFoundException::new);
     }
 }
 

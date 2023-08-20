@@ -44,4 +44,12 @@ public class StudentController {
     public void delete(@PathVariable("id") Long id) {
         studentService.delete(id);
     }
+    @GetMapping("/by-age")
+    public Collection<Student> filteredByAgeMinMax(@RequestParam int min, @RequestParam int max ) {
+        return studentService.getByAgeBetween(min,max);
+    }
+    @GetMapping("/by-faculty")
+    public Collection<Student> filteredByFaculty(@RequestParam Long facultyId ) {
+        return studentService.getByFacultyId(facultyId);
+    }
 }
