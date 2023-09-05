@@ -40,9 +40,9 @@ public class FacultyController {
     public void delete(@PathVariable("id") Long id){
         facultyService.delete(id);
     }
-    @GetMapping("/by-search-or-name")
-    public Collection<Faculty> filteredByColorOrName(@RequestParam String search ) {
-        return facultyService.getByColorOrName(search,search);
+    @GetMapping("/by-color-or-name")
+    public Collection<Faculty> filteredByColorOrName(@RequestParam String coloOrName ) {
+        return facultyService.getByColorOrName(coloOrName,coloOrName);
     }
     @GetMapping("/by-student")
     public Faculty getByStudent(@RequestParam Long studentId){
