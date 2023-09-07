@@ -106,7 +106,7 @@ public class FacultyControllerTest {
 
 
         ResponseEntity<Collection> response = template
-                .getForEntity("/faculty/by-color-or-name?colorOrName=" + color, Collection.class);
+                .getForEntity("/faculty/by-color-or-name?coloOrName=" + color, Collection.class);
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
         assertThat(response.getBody()).isNotNull();
         assertThat(response.getBody().size()).isEqualTo(1);

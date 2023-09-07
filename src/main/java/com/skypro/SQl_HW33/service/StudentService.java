@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 
@@ -34,13 +33,14 @@ public class StudentService {
     public Student update(Long id, Student student){
         Student existingStudent = studentRepository.findById(id).orElseThrow(DataNotFoundedException::new);
         Optional.ofNullable(student.getName()).ifPresent(existingStudent::setName);
-        Optional.ofNullable(student.getAge()).ifPresent(existingStudent::setAge);
-        return studentRepository.save(student);
+//        String name = student.getName();
+//        existingStudent.setName(name);
+        Optional.of(student.getAge()).ifPresent(existingStudent::setAge);
+        return studentRepository.save(existingStudent);
     }
-    public Student delete(Long id){
+    public void delete(Long id){
         Student existingStudent = studentRepository.findById(id).orElseThrow(DataNotFoundedException::new);
         studentRepository.delete(existingStudent);
-        return existingStudent;
     }
     public Collection<Student> getByAgeBetween(int min, int max){
         return studentRepository.findAllByAgeBetween(min,max);
