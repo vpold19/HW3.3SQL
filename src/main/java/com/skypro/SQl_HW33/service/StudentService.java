@@ -6,6 +6,7 @@ import com.skypro.SQl_HW33.repository.StudentRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -47,5 +48,14 @@ public class StudentService {
     }
     public Collection<Student> getByFacultyId(Long facultyId){
         return studentRepository.findAllByFacultyId(facultyId);
+    }
+    public Long getAmountOfStudents(){
+        return studentRepository.getAmountOfStudents();
+    }
+    public Float getAverageAgeOfStudents(){
+        return studentRepository.getAverageAgeOfStudents();
+    }
+    public List<Student> getLastNumbersOfStudent(){
+        return studentRepository.getLastNumberOfStudents();
     }
 }

@@ -5,6 +5,7 @@ import com.skypro.SQl_HW33.service.StudentService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
+import java.util.List;
 
 @RestController
 @RequestMapping("/student")
@@ -51,5 +52,17 @@ public class StudentController {
     @GetMapping("/by-faculty")
     public Collection<Student> findByFaculty(@RequestParam Long facultyId ) {
         return studentService.getByFacultyId(facultyId);
+    }
+    @GetMapping("/amount")
+    public Long getAmountOfStudents(){
+        return studentService.getAmountOfStudents();
+    }
+    @GetMapping("/average-age")
+    public Float getAverageAgeOfStudents(){
+        return studentService.getAverageAgeOfStudents();
+    }
+    @GetMapping("/limit-students")
+    public List<Student>getLastNumbersOfStudents(){
+        return studentService.getLastNumbersOfStudent();
     }
 }

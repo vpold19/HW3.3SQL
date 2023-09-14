@@ -5,6 +5,7 @@ import com.skypro.SQl_HW33.model.Student;
 import com.skypro.SQl_HW33.repository.AvatarRepository;
 import com.skypro.SQl_HW33.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -12,6 +13,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.List;
 
 @Service
 
@@ -26,7 +28,7 @@ public class AvatarService {
         this.studentRepository = studentRepository;
     }
 
-    public Avatar getById(Long id){
+    public Avatar getById(Long id) {
         return avatarRepository.findById(id).orElseThrow();
     }
 
@@ -66,5 +68,10 @@ public class AvatarService {
         avatar.setData(multipartFile.getBytes());
         avatarRepository.save(avatar);
         return avatar;
+    }
+
+    public List<Avatar> getAll(Integer pageNumber, Integer pageSize) {
+        PageRequest pageRequest = PageRequest.of(pageNumber - 1, pageSize);
+        return avatarRepository.findAll(pageRequest).getContent();
     }
 }

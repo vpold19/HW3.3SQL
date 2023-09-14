@@ -2,6 +2,7 @@ package com.skypro.SQl_HW33.repository;
 
 import com.skypro.SQl_HW33.model.Student;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -13,5 +14,11 @@ public interface StudentRepository extends JpaRepository<Student,Long> {
     List<Student>findAllByAgeBetween(int min,int max);
 
     List<Student> findAllByFacultyId(Long facultyId);
+    @Query(value = "SELECT COUNT(*) FROM STUDENT",nativeQuery = true)
+    Long getAmountOfStudents();
+    @Query(value = "SELECT AVG(age) FROM STUDENT",nativeQuery = true)
+    Float getAverageAgeOfStudents();
+    @Query(value = "SELECT * FROM STUDENT LIMIT 2",nativeQuery = true)
+    List<Student> getLastNumberOfStudents();
     }
 
