@@ -1,5 +1,6 @@
 package com.skypro.SQl_HW33.controller;
 
+import com.skypro.SQl_HW33.dto.AvatarDto;
 import com.skypro.SQl_HW33.model.Avatar;
 import com.skypro.SQl_HW33.service.AvatarService;
 import org.springframework.http.HttpHeaders;
@@ -55,9 +56,9 @@ public class AvatarController {
         headers.setContentLength(avatar.getFileSize());
         return ResponseEntity.status(200).headers(headers).body(data);
     }
-    @GetMapping()
-    public List<Avatar> getAll(@RequestParam ("pageNumber") Integer pageNumber,
-                               @RequestParam ("pageSize") Integer pageSize ){
+    @GetMapping("/page/{num}")
+    public List<AvatarDto> getAll(@RequestParam ("pageNumber") Integer pageNumber,
+                                  @RequestParam ("pageSize") Integer pageSize ){
         return avatarService.getAll(pageNumber,pageSize);
     }
 }

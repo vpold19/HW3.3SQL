@@ -3,6 +3,7 @@ package com.skypro.SQl_HW33.service;
 import com.skypro.SQl_HW33.exception.DataNotFoundedException;
 import com.skypro.SQl_HW33.model.Student;
 import com.skypro.SQl_HW33.repository.StudentRepository;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
@@ -56,6 +57,8 @@ public class StudentService {
         return studentRepository.getAverageAgeOfStudents();
     }
     public List<Student> getLastNumbersOfStudent(){
+        //PageRequest pageRequest = PageRequest.of()
         return studentRepository.getLastNumberOfStudents();
     }
+
 }

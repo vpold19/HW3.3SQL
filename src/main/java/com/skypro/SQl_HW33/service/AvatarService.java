@@ -1,5 +1,6 @@
 package com.skypro.SQl_HW33.service;
 
+import com.skypro.SQl_HW33.dto.AvatarDto;
 import com.skypro.SQl_HW33.model.Avatar;
 import com.skypro.SQl_HW33.model.Student;
 import com.skypro.SQl_HW33.repository.AvatarRepository;
@@ -14,6 +15,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 
@@ -70,8 +72,11 @@ public class AvatarService {
         return avatar;
     }
 
-    public List<Avatar> getAll(Integer pageNumber, Integer pageSize) {
+    public List<AvatarDto> getAll(Integer pageNumber, Integer pageSize) {
         PageRequest pageRequest = PageRequest.of(pageNumber - 1, pageSize);
-        return avatarRepository.findAll(pageRequest).getContent();
+        List<Avatar> avatars = avatarRepository.findAll(pageRequest).getContent();
+        return avatars.stream()
+                .map(AvatarDto::fromEntity)
+                .collect(Collectors.toList());
     }
 }
