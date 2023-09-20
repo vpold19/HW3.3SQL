@@ -23,7 +23,7 @@ add constraint unique_faculty_name unique("name", "color");
 alter table student
 alter column age set default 20;
 
---Task 2
+--Task 2 scripts422.sql.
 create table person(
   id serial primary key,
   name text,
@@ -48,7 +48,7 @@ insert into car( car_name, model, car_price) values ( 'Toyota', '365X', 3500000)
 insert into car( car_name, model, car_price) values ( 'Audi', 'R8', 13500000);
 insert into car( car_name, model, car_price) values ( 'Tesla', 'X', 23500000);
 
---Task 3
+--Task 3 scripts423.sql.
 select student.name, student.age , student.faculty_id , faculty.color
 from student
 inner join faculty  on student.faculty_id  = faculty.id  ;
@@ -56,3 +56,4 @@ inner join faculty  on student.faculty_id  = faculty.id  ;
 select student.id, student.name
 from student
 inner join avatar on student.id  = avatar.student_id  ;
+
