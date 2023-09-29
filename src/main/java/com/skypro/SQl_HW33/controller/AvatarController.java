@@ -32,7 +32,7 @@ public class AvatarController {
         try {
             Long avatarId = avatarService.save(studentId, multipartFile);
             return ResponseEntity.ok(avatarId);
-        } catch (IOException e) {
+        } catch (Throwable e) {
             logger.error("Failed to save avatar with id = " + studentId, e);
             return ResponseEntity.badRequest().build();
         }
