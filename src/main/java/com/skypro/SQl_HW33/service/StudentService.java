@@ -1,6 +1,7 @@
 package com.skypro.SQl_HW33.service;
 
 import com.skypro.SQl_HW33.exception.DataNotFoundedException;
+import com.skypro.SQl_HW33.exception.StudentNotFoundException;
 import com.skypro.SQl_HW33.model.Student;
 import com.skypro.SQl_HW33.repository.FacultyRepository;
 import com.skypro.SQl_HW33.repository.StudentRepository;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 
@@ -103,6 +105,7 @@ public class StudentService {
         t1.start();
         t2.start();
     }
+
     public void printSync() {
         List<Student> all = studentRepository.findAll();
 
@@ -120,8 +123,24 @@ public class StudentService {
         t1.start();
         t2.start();
     }
-    private synchronized  void printSync(Student student){
+
+    private synchronized void printSync(Student student) {
         System.out.println(student);
+    }
+
+    public List<String> getAllStartsWithA() {
+        return studentRepository.findAll().stream()
+                .map(Student::getName)
+                .filter(s -> s.startsWith("A"))
+                .sorted()
+                .collect(Collectors.toList());
+    }
+    public double getAverageAge(){
+        return  studentRepository.findAll().stream()
+                .mapToInt(Student::getAge)
+                .average()
+                .orElseThrow(StudentNotFoundException:: new);
 
     }
+
 }

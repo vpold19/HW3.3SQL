@@ -45,32 +45,48 @@ public class StudentController {
     public void delete(@PathVariable("id") Long id) {
         studentService.delete(id);
     }
+
     @GetMapping("/by-age")
-    public Collection<Student> filteredByAgeMinMax(@RequestParam int min, @RequestParam int max ) {
-        return studentService.getByAgeBetween(min,max);
+    public Collection<Student> filteredByAgeMinMax(@RequestParam int min, @RequestParam int max) {
+        return studentService.getByAgeBetween(min, max);
     }
+
     @GetMapping("/by-faculty")
-    public Collection<Student> findByFaculty(@RequestParam Long facultyId ) {
+    public Collection<Student> findByFaculty(@RequestParam Long facultyId) {
         return studentService.getByFacultyId(facultyId);
     }
+
     @GetMapping("/amount")
-    public Long getAmountOfStudents(){
+    public Long getAmountOfStudents() {
         return studentService.count();
     }
+
     @GetMapping("/average-age")
-    public Float getAverageAgeOfStudents(){
+    public Float getAverageAgeOfStudents() {
         return studentService.getAverageAgeOfStudents();
     }
+
     @GetMapping("/limit-students")
-    public List<Student>getLastNumbersOfStudents(){
+    public List<Student> getLastNumbersOfStudents() {
         return studentService.getLastNumbersOfStudent();
     }
+
     @GetMapping("/threads/async")
-    public void printAsync(){
+    public void printAsync() {
         studentService.printAsync();
     }
+
     @GetMapping("/threads/sync")
-    public void printSync(){
+    public void printSync() {
         studentService.printSync();
+    }
+
+    @GetMapping("/stream/starts-with-a")
+    public List<String> startsWithA() {
+        return studentService.getAllStartsWithA();
+    }
+    @GetMapping("/stream/average-age")
+    public double getAverageAge() {
+        return studentService.getAverageAge();
     }
 }
