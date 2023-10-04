@@ -65,4 +65,12 @@ public class StudentController {
     public List<Student>getLastNumbersOfStudents(){
         return studentService.getLastNumbersOfStudent();
     }
+    @GetMapping("/threads/async")
+    public void printAsync(){
+        studentService.printAsync();
+    }
+    @GetMapping("/threads/sync")
+    public void printSync(){
+        studentService.printSync();
+    }
 }
